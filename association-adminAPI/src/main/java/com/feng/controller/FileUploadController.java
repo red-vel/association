@@ -56,15 +56,14 @@ public class FileUploadController {
     @PostMapping("/uploadImg")
     @ResponseBody
     public ResponseResult uploadImg(@RequestParam("file") MultipartFile file,String relativePath, HttpServletRequest request) throws IOException {
-        String fileExt[] = {"jpg", "png"};
-        checkFileExt(file, fileExt, "请上传jpg,png格式图片");
-//        String relativePath = "/images/";
+        String fileExt[] = {"jpg", "jpeg", "png"};
+        checkFileExt(file, fileExt, "请上传jpg,jpeg,png格式图片");
         if(StringUtils.isEmpty(relativePath)){
             relativePath = "/images/";
         }
         String fileName = file.getOriginalFilename();
-        String absolutePath = getFileSavePath(relativePath)+"/"+ fileName;
-       String imgRelativePath = relativePath +"/"+ fileName;
+        String absolutePath = getFileSavePath(relativePath) + "/" + fileName;
+        String imgRelativePath = relativePath + "/" + fileName;
         System.out.println(imgRelativePath);
         File dest = new File(absolutePath);
         try {
